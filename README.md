@@ -1,7 +1,5 @@
 # Portafolio de IA aplicada: datos, ML en producción y automatización
 
-[![CI](https://github.com/ricciulli10/proyectos/actions/workflows/ci.yml/badge.svg)](https://github.com/ricciulli10/proyectos/actions/workflows/ci.yml)
-
 Tres proyectos conectados sobre un mismo caso: la evaluación de crédito en una fintech ficticia.
 Cada número de este README sale de un script del repo, y los resultados están en [`reports/`](reports/).
 
