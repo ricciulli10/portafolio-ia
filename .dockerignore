@@ -1,0 +1,6 @@
+.git
+.venv
+artifacts
+data/raw
+tests
+reports

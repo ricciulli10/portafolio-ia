@@ -1,0 +1,32 @@
+# Local demo. Every published port binds to 127.0.0.1 so nothing is reachable from the network.
+# Requires INTAKE_WEBHOOK_SECRET in a git-ignored .env file (see .env.example).
+services:
+  scoring:
+    build: .
+    ports:
+      - "127.0.0.1:18000:8000"
+    environment:
+      CREDIT_API_KEY: ${CREDIT_API_KEY:-}
+
+  intake:
+    build: .
+    command: ["uvicorn", "intake_bot.app:app", "--host", "0.0.0.0", "--port", "8001"]
+    environment:
+      INTAKE_WEBHOOK_SECRET: ${INTAKE_WEBHOOK_SECRET:?Set INTAKE_WEBHOOK_SECRET in .env}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://127.0.0.1:8001/health')"]
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.47.2
+    depends_on: [intake]
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      INTAKE_WEBHOOK_SECRET: ${INTAKE_WEBHOOK_SECRET:?Set INTAKE_WEBHOOK_SECRET in .env}
+      INTAKE_URL: http://intake:8001/webhooks/application
+      NODE_FUNCTION_ALLOW_BUILTIN: crypto
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_PERSONALIZATION_ENABLED: "false"
+    volumes:
+      - ./automation/n8n:/workflows:ro

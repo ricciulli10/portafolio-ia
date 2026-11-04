@@ -1,0 +1,131 @@
+{
+  "winner": "logistic_regression",
+  "threshold": 0.18,
+  "train_oof_cost": 0.5125,
+  "cv": [
+    {
+      "model": "logistic_regression",
+      "auc_mean": 0.7723,
+      "auc_std": 0.0485,
+      "ap_mean": 0.5946,
+      "ap_std": 0.0686,
+      "brier_mean": 0.1716,
+      "brier_std": 0.0185,
+      "cost_mean": 0.5254,
+      "cost_std": 0.0768
+    },
+    {
+      "model": "random_forest",
+      "auc_mean": 0.7897,
+      "auc_std": 0.0366,
+      "ap_mean": 0.6256,
+      "ap_std": 0.0672,
+      "brier_mean": 0.1657,
+      "brier_std": 0.0099,
+      "cost_mean": 0.5417,
+      "cost_std": 0.0361
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "auc_mean": 0.7842,
+      "auc_std": 0.0326,
+      "ap_mean": 0.608,
+      "ap_std": 0.0467,
+      "brier_mean": 0.168,
+      "brier_std": 0.0142,
+      "cost_mean": 0.545,
+      "cost_std": 0.0722
+    },
+    {
+      "model": "baseline_prior",
+      "auc_mean": 0.5,
+      "auc_std": 0.0,
+      "ap_mean": 0.3,
+      "ap_std": 0.0,
+      "brier_mean": 0.21,
+      "brier_std": 0.0,
+      "cost_mean": 0.7,
+      "cost_std": 0.0
+    }
+  ],
+  "test": {
+    "n": 200,
+    "roc_auc": 0.8008,
+    "roc_auc_ci95": [
+      0.7221,
+      0.8648
+    ],
+    "average_precision": 0.651,
+    "brier": 0.1573,
+    "cost_per_applicant": 0.61,
+    "cost_ci95": [
+      0.48,
+      0.765
+    ],
+    "cost_approve_everyone": 1.5,
+    "cost_reject_everyone": 0.7,
+    "approval_rate": 0.33,
+    "default_rate_among_approved": 0.1212
+  },
+  "fairness": {
+    "sex": [
+      {
+        "group": "female",
+        "n": 61,
+        "approval_rate": 0.328,
+        "good_payer_approval_rate": 0.439
+      },
+      {
+        "group": "male",
+        "n": 139,
+        "approval_rate": 0.331,
+        "good_payer_approval_rate": 0.404
+      }
+    ],
+    "age": [
+      {
+        "group": "25_plus",
+        "n": 161,
+        "approval_rate": 0.366,
+        "good_payer_approval_rate": 0.433
+      },
+      {
+        "group": "under_25",
+        "n": 39,
+        "approval_rate": 0.179,
+        "good_payer_approval_rate": 0.3
+      }
+    ],
+    "foreign_worker": [
+      {
+        "group": "no",
+        "n": 6,
+        "approval_rate": 0.5,
+        "good_payer_approval_rate": 0.6
+      },
+      {
+        "group": "yes",
+        "n": 194,
+        "approval_rate": 0.325,
+        "good_payer_approval_rate": 0.407
+      }
+    ]
+  },
+  "max_psi_train_vs_test": [
+    {
+      "feature": "purpose",
+      "psi": 0.0727,
+      "status": "stable"
+    },
+    {
+      "feature": "employment",
+      "psi": 0.0477,
+      "status": "stable"
+    },
+    {
+      "feature": "credit_amount",
+      "psi": 0.0405,
+      "status": "stable"
+    }
+  ]
+}

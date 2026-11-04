@@ -1,0 +1,17 @@
+{
+  "simulated": true,
+  "question": "Does an SMS reminder raise on-time payment?",
+  "per_arm_sample_size": 3551,
+  "single_run": {
+    "rate_a": 0.7006,
+    "rate_b": 0.7381,
+    "lift": 0.0375,
+    "ci95": [
+      0.0166,
+      0.0583
+    ],
+    "p_value": 0.0004
+  },
+  "aa_false_positive_rate": 0.046,
+  "ab_power": 0.794
+}

@@ -1,0 +1,104 @@
+{
+  "default_rate_by_checking": [
+    {
+      "checking_status": "<0",
+      "loans": 274,
+      "default_rate": 0.493
+    },
+    {
+      "checking_status": "0<=X<200",
+      "loans": 269,
+      "default_rate": 0.39
+    },
+    {
+      "checking_status": ">=200",
+      "loans": 63,
+      "default_rate": 0.222
+    },
+    {
+      "checking_status": "no checking",
+      "loans": 394,
+      "default_rate": 0.117
+    }
+  ],
+  "riskiest_purposes_with_volume": [
+    {
+      "purpose": "education",
+      "loans": 50,
+      "default_rate": 0.44,
+      "exposure": 159020,
+      "exposure_share": 5.2,
+      "risk_rank": 1
+    },
+    {
+      "purpose": "new car",
+      "loans": 234,
+      "default_rate": 0.38,
+      "exposure": 716748,
+      "exposure_share": 23.2,
+      "risk_rank": 2
+    },
+    {
+      "purpose": "business",
+      "loans": 97,
+      "default_rate": 0.351,
+      "exposure": 403330,
+      "exposure_share": 13.1,
+      "risk_rank": 3
+    },
+    {
+      "purpose": "furniture/equipment",
+      "loans": 181,
+      "default_rate": 0.32,
+      "exposure": 555125,
+      "exposure_share": 18.0,
+      "risk_rank": 4
+    },
+    {
+      "purpose": "radio/tv",
+      "loans": 280,
+      "default_rate": 0.221,
+      "exposure": 696543,
+      "exposure_share": 22.6,
+      "risk_rank": 5
+    },
+    {
+      "purpose": "used car",
+      "loans": 103,
+      "default_rate": 0.165,
+      "exposure": 553133,
+      "exposure_share": 17.9,
+      "risk_rank": 6
+    }
+  ],
+  "default_rate_by_duration_quartile": [
+    {
+      "quartile": 1,
+      "min_months": 4,
+      "max_months": 12,
+      "loans": 250,
+      "default_rate": 0.168
+    },
+    {
+      "quartile": 2,
+      "min_months": 12,
+      "max_months": 18,
+      "loans": 250,
+      "default_rate": 0.268
+    },
+    {
+      "quartile": 3,
+      "min_months": 18,
+      "max_months": 24,
+      "loans": 250,
+      "default_rate": 0.316
+    },
+    {
+      "quartile": 4,
+      "min_months": 24,
+      "max_months": 72,
+      "loans": 250,
+      "default_rate": 0.448
+    }
+  ]
+}

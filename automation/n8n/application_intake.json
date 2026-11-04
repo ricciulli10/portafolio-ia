@@ -1,0 +1,123 @@
+{
+  "name": "Application intake",
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "nodes": [
+    {
+      "id": "1b0f3c9e-0001-4a10-9a00-000000000001",
+      "name": "Application received",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "webhookId": "application-intake",
+      "parameters": {"httpMethod": "POST", "path": "application", "responseMode": "responseNode", "options": {}}
+    },
+    {
+      "id": "1b0f3c9e-0001-4a10-9a00-000000000002",
+      "name": "Sign request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const crypto = require('crypto');\nconst body = JSON.stringify($input.first().json.body);\nconst timestamp = String(Math.floor(Date.now() / 1000));\nconst secret = $env.INTAKE_WEBHOOK_SECRET;\nif (!secret) throw new Error('INTAKE_WEBHOOK_SECRET is not set');\nconst signature = 'sha256=' + crypto.createHmac('sha256', secret).update(`${timestamp}.${body}`).digest('hex');\n// Same payload, same key: a retry cannot create a second event.\nconst key = crypto.createHash('sha256').update(body).digest('hex');\nreturn [{ json: { body, timestamp, signature, key } }];"
+      }
+    },
+    {
+      "id": "1b0f3c9e-0001-4a10-9a00-000000000003",
+      "name": "Triage",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.INTAKE_URL }}",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "Content-Type", "value": "application/json"},
+          {"name": "X-Timestamp", "value": "={{ $json.timestamp }}"},
+          {"name": "X-Signature", "value": "={{ $json.signature }}"},
+          {"name": "X-Idempotency-Key", "value": "={{ $json.key }}"}
+        ]},
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ $json.body }}",
+        "options": {"timeout": 10000}
+      }
+    },
+    {
+      "id": "1b0f3c9e-0001-4a10-9a00-000000000004",
+      "name": "Needs senior review?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [720, 300],
+      "parameters": {
+        "conditions": {
+          "options": {"caseSensitive": true, "leftValue": "", "typeValidation": "strict"},
+          "combinator": "and",
+          "conditions": [{
+            "id": "c1",
+            "leftValue": "={{ $json.route }}",
+            "rightValue": "senior_review",
+            "operator": {"type": "string", "operation": "equals"}
+          }]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "1b0f3c9e-0001-4a10-9a00-000000000005",
+      "name": "Notify senior reviewer",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [960, 200],
+      "parameters": {
+        "assignments": {"assignments": [
+          {"id": "a1", "name": "queue", "value": "senior_review", "type": "string"},
+          {"id": "a2", "name": "reasons", "value": "={{ $json.reasons.join('; ') }}", "type": "string"}
+        ]},
+        "includeOtherFields": false,
+        "options": {}
+      }
+    },
+    {
+      "id": "1b0f3c9e-0001-4a10-9a00-000000000006",
+      "name": "Add to analyst queue",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [960, 400],
+      "parameters": {
+        "assignments": {"assignments": [
+          {"id": "a3", "name": "queue", "value": "analyst_queue", "type": "string"},
+          {"id": "a4", "name": "reasons", "value": "", "type": "string"}
+        ]},
+        "includeOtherFields": false,
+        "options": {}
+      }
+    },
+    {
+      "id": "1b0f3c9e-0001-4a10-9a00-000000000007",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1200, 300],
+      "parameters": {"respondWith": "firstIncomingItem", "options": {}}
+    }
+  ],
+  "connections": {
+    "Application received": {"main": [[{"node": "Sign request", "type": "main", "index": 0}]]},
+    "Sign request": {"main": [[{"node": "Triage", "type": "main", "index": 0}]]},
+    "Triage": {"main": [[{"node": "Needs senior review?", "type": "main", "index": 0}]]},
+    "Needs senior review?": {"main": [
+      [{"node": "Notify senior reviewer", "type": "main", "index": 0}],
+      [{"node": "Add to analyst queue", "type": "main", "index": 0}]
+    ]},
+    "Notify senior reviewer": {"main": [[{"node": "Respond", "type": "main", "index": 0}]]},
+    "Add to analyst queue": {"main": [[{"node": "Respond", "type": "main", "index": 0}]]}
+  }
+}
