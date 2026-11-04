@@ -93,5 +93,11 @@ def test_protected_fields_are_rejected(client):
     assert "age" not in response.text
 
 
+def test_non_ascii_signature_is_refused_cleanly(client):
+    body = payload()
+    sent = {**headers(body), "X-Signature": "ñ".encode("latin-1")}
+    assert client.post(URL, content=body, headers=sent).status_code == 401
+
+
 def test_verify_handles_garbage_timestamp():
     assert verify(SECRET, "not-a-number", b"", "sha256=0", time.time()) is False

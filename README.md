@@ -51,7 +51,7 @@ Latencia p50 en proceso: 48 ms puntuando y 93 ms con explicación local ([detall
 El ciclo de MLOps incluye entrenamiento reproducible, registro en MLflow, chequeo de drift y CI en cada push.
 
 **RAG y búsqueda semántica** ([`src/rag_lab/`](src/rag_lab/)). BM25 escrito desde cero, LSA, embeddings y fusión
-por rangos, evaluados con 32 preguntas parafraseadas sobre un manual ficticio de 28 secciones:
+por rangos, evaluados con 32 preguntas parafraseadas sobre un manual ficticio de 26 secciones:
 
 | Recuperador | Recall@1 | Recall@5 | MRR |
 | --- | --- | --- | --- |

@@ -70,7 +70,7 @@ app = FastAPI(title="Credit risk scoring", version="1.0", lifespan=lifespan)
 def require_api_key(x_api_key: str | None = Header(default=None)) -> None:
     """Enforced whenever CREDIT_API_KEY is set. The key only ever comes from the environment."""
     expected = os.environ.get("CREDIT_API_KEY")
-    if expected and not secrets.compare_digest(x_api_key or "", expected):
+    if expected and not secrets.compare_digest((x_api_key or "").encode(), expected.encode()):
         raise HTTPException(401, "Invalid or missing API key")
 
 

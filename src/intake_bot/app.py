@@ -45,7 +45,7 @@ def verify(secret: str, timestamp: str, body: bytes, signature: str, now: float)
         fresh = abs(now - int(timestamp)) <= MAX_SKEW_SECONDS
     except ValueError:
         return False
-    return fresh and hmac.compare_digest(sign(secret, timestamp, body), signature)
+    return fresh and hmac.compare_digest(sign(secret, timestamp, body).encode(), signature.encode())
 
 
 class Ledger:
@@ -113,9 +113,12 @@ async def receive(
     if not secret:
         raise HTTPException(503, "Endpoint not configured")
 
-    body = await request.body()
-    if len(body) > MAX_BODY_BYTES:
-        raise HTTPException(413, "Payload too large")
+    received = bytearray()
+    async for chunk in request.stream():
+        received += chunk
+        if len(received) > MAX_BODY_BYTES:  # stop reading, do not buffer an oversized body
+            raise HTTPException(413, "Payload too large")
+    body = bytes(received)
     if not verify(secret, x_timestamp, body, x_signature, time.time()):
         raise HTTPException(401, "Invalid signature")
 

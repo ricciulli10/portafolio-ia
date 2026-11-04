@@ -80,6 +80,15 @@ def test_api_key_is_enforced_when_configured(credit_model, monkeypatch):
         assert client.post("/score", json=_payload(), headers=right).status_code == 200
 
 
+def test_non_ascii_api_key_is_refused_cleanly(credit_model, monkeypatch):
+    from credit_risk.api import app
+
+    monkeypatch.setenv("CREDIT_API_KEY", "unit-test-value")
+    with TestClient(app) as client:
+        headers = {b"X-API-Key": "ñ".encode("latin-1")}
+        assert client.post("/score", json=_payload(), headers=headers).status_code == 401
+
+
 def test_api_rejects_oversized_strings(credit_model):
     from credit_risk.api import app
 

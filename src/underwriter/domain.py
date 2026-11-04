@@ -13,7 +13,6 @@ from credit_risk.data import PROTECTED, load_credit
 from credit_risk.train import SEED
 
 SENIOR_LIMIT = 5000
-PRODUCT_LIMIT = 15000
 BANNED_REASONING = re.compile(
     r"\b(sex|gender|male|female|women|woman|men|man|marital|married|single|divorced|widow\w*"
     r"|age|aged|old|young|elderly|nationality|foreign\w*|migrant|immigrant)\b",
