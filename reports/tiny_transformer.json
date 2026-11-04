@@ -1,0 +1,169 @@
+{
+  "characters": 2110726,
+  "vocab": 92,
+  "parameters": 819456,
+  "steps": 6000,
+  "device": "cpu",
+  "train_seconds": 5003,
+  "bigram_val_nll": 2.3048,
+  "final_val_nll": 1.2471,
+  "best_val_nll": 1.2369,
+  "history": [
+    {
+      "step": 0,
+      "train": 4.5203,
+      "val": 4.5198
+    },
+    {
+      "step": 200,
+      "train": 2.2782,
+      "val": 2.2766
+    },
+    {
+      "step": 400,
+      "train": 2.0043,
+      "val": 2.0033
+    },
+    {
+      "step": 600,
+      "train": 1.8053,
+      "val": 1.8058
+    },
+    {
+      "step": 800,
+      "train": 1.6458,
+      "val": 1.6618
+    },
+    {
+      "step": 1000,
+      "train": 1.5501,
+      "val": 1.5684
+    },
+    {
+      "step": 1200,
+      "train": 1.4837,
+      "val": 1.4994
+    },
+    {
+      "step": 1400,
+      "train": 1.4299,
+      "val": 1.4547
+    },
+    {
+      "step": 1600,
+      "train": 1.3886,
+      "val": 1.4097
+    },
+    {
+      "step": 1800,
+      "train": 1.3555,
+      "val": 1.3876
+    },
+    {
+      "step": 2000,
+      "train": 1.3361,
+      "val": 1.3635
+    },
+    {
+      "step": 2200,
+      "train": 1.3196,
+      "val": 1.353
+    },
+    {
+      "step": 2400,
+      "train": 1.303,
+      "val": 1.3399
+    },
+    {
+      "step": 2600,
+      "train": 1.2944,
+      "val": 1.3242
+    },
+    {
+      "step": 2800,
+      "train": 1.2738,
+      "val": 1.3102
+    },
+    {
+      "step": 3000,
+      "train": 1.2681,
+      "val": 1.3143
+    },
+    {
+      "step": 3200,
+      "train": 1.2458,
+      "val": 1.2932
+    },
+    {
+      "step": 3400,
+      "train": 1.2431,
+      "val": 1.2867
+    },
+    {
+      "step": 3600,
+      "train": 1.2315,
+      "val": 1.2784
+    },
+    {
+      "step": 3800,
+      "train": 1.2277,
+      "val": 1.2675
+    },
+    {
+      "step": 4000,
+      "train": 1.2175,
+      "val": 1.2681
+    },
+    {
+      "step": 4200,
+      "train": 1.2108,
+      "val": 1.2554
+    },
+    {
+      "step": 4400,
+      "train": 1.2049,
+      "val": 1.2566
+    },
+    {
+      "step": 4600,
+      "train": 1.194,
+      "val": 1.248
+    },
+    {
+      "step": 4800,
+      "train": 1.1951,
+      "val": 1.2434
+    },
+    {
+      "step": 5000,
+      "train": 1.1868,
+      "val": 1.2413
+    },
+    {
+      "step": 5200,
+      "train": 1.1852,
+      "val": 1.2401
+    },
+    {
+      "step": 5400,
+      "train": 1.1856,
+      "val": 1.244
+    },
+    {
+      "step": 5600,
+      "train": 1.1856,
+      "val": 1.2402
+    },
+    {
+      "step": 5800,
+      "train": 1.1898,
+      "val": 1.2369
+    },
+    {
+      "step": 6000,
+      "train": 1.183,
+      "val": 1.2471
+    }
+  ],
+  "sample": "En un lugar de la Mancha, porque se ha prometido de los brazos de la\nparte de la señora Dulcinea, que no le dejasen por mi señora Lotario de\nlo que era de su señor nombre de los almas, de ver, como con todo aquello\nsobre cuatro de la caballería, donde sean tantas fuerzas; porque entre ellos\ndescubre, si fuera de volver por el mayor don Quijote, que no lo seguran las\nmanos, o como su piedra he adornue, no están cosas algu"
+}

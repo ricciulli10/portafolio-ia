@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[dev]"
+      - name: Lint
+        run: |
+          ruff check src tests
+          ruff format --check src tests
+      - name: Train the credit model
+        run: python -m credit_risk.train
+      - name: Tests
+        run: pytest --cov=src --cov-report=term
+      - name: Agent evals (offline)
+        run: python -m underwriter.evals
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install bandit detect-secrets
+      - name: Static analysis
+        run: bandit -q -r src
+      - name: Secret scan
+        run: |
+          detect-secrets scan src tests data reports automation > scan.json
+          python -c "import json; r = json.load(open('scan.json'))['results']; print(r); raise SystemExit(bool(r))"

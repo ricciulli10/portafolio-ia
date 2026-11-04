@@ -1,0 +1,12 @@
+{
+  "requests": 280,
+  "note": "In-process over ASGI on a desktop CPU, one client, no network.",
+  "with_explanation": {
+    "p50_ms": 93.4,
+    "p95_ms": 129.0
+  },
+  "score_only": {
+    "p50_ms": 47.8,
+    "p95_ms": 65.1
+  }
+}

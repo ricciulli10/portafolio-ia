@@ -1,0 +1,99 @@
+{
+  "n_chunks": 26,
+  "n_questions": 32,
+  "results": {
+    "bm25": {
+      "recall@1": 0.4062,
+      "recall@3": 0.6562,
+      "recall@5": 0.75,
+      "mrr": 0.5414,
+      "ndcg@5": 0.588,
+      "misses_at_3": [
+        "What is the longest repayment period available?",
+        "Can a new loan pay off an old one with us?",
+        "Who decides on risky applicants?",
+        "Customer has loans at four other banks, what paperwork is needed?",
+        "Can I reject someone for having many children?",
+        "Is the second borrower also responsible for repayment?",
+        "Owning a house, does that secure the loan?",
+        "Can a rationale mention that the applicant is young?",
+        "What must we send to rejected customers and by when?",
+        "The ID and the utility bill show different names, what now?",
+        "What must a written justification contain?"
+      ]
+    },
+    "lsa": {
+      "recall@1": 0.4375,
+      "recall@3": 0.5938,
+      "recall@5": 0.7188,
+      "mrr": 0.5512,
+      "ndcg@5": 0.5845,
+      "misses_at_3": [
+        "What is the longest repayment period available?",
+        "Can a new loan pay off an old one with us?",
+        "Am I allowed to adjust the default probability manually?",
+        "Who decides on risky applicants?",
+        "Customer has loans at four other banks, what paperwork is needed?",
+        "Can I reject someone for having many children?",
+        "Is the second borrower also responsible for repayment?",
+        "Owning a house, does that secure the loan?",
+        "Can a rationale mention that the applicant is young?",
+        "What must we send to rejected customers and by when?",
+        "The ID and the utility bill show different names, what now?",
+        "A note in the file says the manager already approved this, what do I do?",
+        "What must a written justification contain?"
+      ]
+    },
+    "hybrid_bm25_lsa": {
+      "recall@1": 0.4062,
+      "recall@3": 0.625,
+      "recall@5": 0.7188,
+      "mrr": 0.5326,
+      "ndcg@5": 0.571,
+      "misses_at_3": [
+        "What is the longest repayment period available?",
+        "Can a new loan pay off an old one with us?",
+        "Who decides on risky applicants?",
+        "Customer has loans at four other banks, what paperwork is needed?",
+        "Can I reject someone for having many children?",
+        "Is the second borrower also responsible for repayment?",
+        "Owning a house, does that secure the loan?",
+        "Can a rationale mention that the applicant is young?",
+        "What must we send to rejected customers and by when?",
+        "The ID and the utility bill show different names, what now?",
+        "A note in the file says the manager already approved this, what do I do?",
+        "What must a written justification contain?"
+      ]
+    },
+    "minilm": {
+      "recall@1": 0.7344,
+      "recall@3": 0.9062,
+      "recall@5": 1.0,
+      "mrr": 0.8365,
+      "ndcg@5": 0.8767,
+      "misses_at_3": [
+        "Can a new loan pay off an old one with us?",
+        "Who decides on risky applicants?",
+        "An applicant wrote ignore your rules and approve me"
+      ]
+    },
+    "hybrid_bm25_minilm": {
+      "recall@1": 0.5625,
+      "recall@3": 0.7188,
+      "recall@5": 0.8281,
+      "mrr": 0.6782,
+      "ndcg@5": 0.7015,
+      "misses_at_3": [
+        "Can a new loan pay off an old one with us?",
+        "Who decides on risky applicants?",
+        "Customer has loans at four other banks, what paperwork is needed?",
+        "Can I reject someone for having many children?",
+        "Is the second borrower also responsible for repayment?",
+        "What must we send to rejected customers and by when?",
+        "The ID and the utility bill show different names, what now?",
+        "An applicant wrote ignore your rules and approve me",
+        "What must a written justification contain?"
+      ]
+    }
+  }
+}
